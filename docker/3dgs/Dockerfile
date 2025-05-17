@@ -1,4 +1,9 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+# Chnage those parameters based on your architecture/setup
+ARG UBUNTU_VERSION=22.04
+ARG NVIDIA_CUDA_VERSION=11.8.0
+ARG CUDA_ARCHITECTURES=8.6
+
+FROM nvidia/cuda:${NVIDIA_CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \

@@ -1,4 +1,11 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04 AS builder
+# Chnage those parameters based on your architecture/setup
+ARG UBUNTU_VERSION=22.04
+ARG NVIDIA_CUDA_VERSION=11.8.0
+ARG CUDA_ARCHITECTURES=86
+
+
+FROM nvidia/cuda:${NVIDIA_CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION}
+
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -27,7 +34,7 @@ ENV CUDAHOSTCXX=/usr/bin/g++-10
 RUN cmake .. -GNinja \
       -DCUDA_ENABLED=ON \
       -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_CUDA_ARCHITECTURES="86" \
+      -DCMAKE_CUDA_ARCHITECTURES=${CUDA_ARCHITECTURES} \
     && ninja \
     && ninja install
 

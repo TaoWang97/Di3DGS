@@ -22,3 +22,4 @@ docker build \
 echo "✅ Docker image $IMAGE_NAME:$TAG built successfully"
 
 docker push "$REPO/$IMAGE_NAME:$TAG"
+echo "✅ Pushed docker image $IMAGE_NAME:$TAG successfully"
