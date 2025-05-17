@@ -1,9 +1,9 @@
-FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
       python3.10 python3.10-distutils python3-pip \
-      git wget build-essential \
+      git wget build-essential ninja-build \
       libgl1-mesa-glx libglib2.0-0 \
       libglew-dev libfreeimage-dev \
       imagemagick \

@@ -1,0 +1,6 @@
+[submodule "colmap"]
+	path = colmap
+	url = git@github.com:TaoWang97/colmap.git
+[submodule "gaussian_splatting"]
+	path = gaussian_splatting
+	url = git@github.com:TaoWang97/gaussian-splatting.git
