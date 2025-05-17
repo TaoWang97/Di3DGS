@@ -9,7 +9,14 @@ If you haven't used --recursive, then run:
 git submodule update --init --recursive
 ```
 ## Hardware Requirement
-cuda:11.8
+The default CUDA version is 11.8
+However, you can build your docker images simply by replacing parameters in the Dockerfile based on your hardware.
+```bash
+ARG NVIDIA_CUDA_VERSION=11.8.0
+ARG TORCH_CUDA_ARCH=8.6
+ARG CUDA_ARCHITECTURES=86
+```
+
 
 ## COLMAP
 Pull the repo from a docker registry:

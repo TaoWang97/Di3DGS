@@ -1,7 +1,7 @@
 # Chnage those parameters based on your architecture/setup
 ARG UBUNTU_VERSION=22.04
 ARG NVIDIA_CUDA_VERSION=11.8.0
-ARG CUDA_ARCHITECTURES=8.6
+ARG TORCH_CUDA_ARCH=8.6
 
 FROM nvidia/cuda:${NVIDIA_CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION}
 
@@ -38,7 +38,7 @@ COPY gaussian_splatting /workspace/gaussian-splatting
 
 # Force Torch extension build to target the correct compute capability
 ENV CUDA_HOME="/usr/local/cuda"
-ENV TORCH_CUDA_ARCH_LIST="8.6"
+ENV TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH}"
 
 # Install your local submodules
 RUN pip install \
