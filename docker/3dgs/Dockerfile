@@ -2,7 +2,7 @@ FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      python3.10 python3.10-distutils python3-pip \
+      python3.10 python3.10-distutils python3-pip python3.10-dev \
       git wget build-essential ninja-build \
       libgl1-mesa-glx libglib2.0-0 \
       libglew-dev libfreeimage-dev \
@@ -18,11 +18,12 @@ RUN pip install --no-cache-dir \
       plyfile \
       tqdm \
       opencv-python \
-      joblib \
-      torch==2.6.0 \
-      torchvision==0.21.0 \
-      torchaudio==2.6.0 \
-      -f https://download.pytorch.org/whl/cu118/torch_stable.html
+      joblib
+
+RUN pip install --no-cache-dir \
+      torch torchvision \
+      torchaudio \
+      --index-url https://download.pytorch.org/whl/cu118
 
 # Workspace & your code
 WORKDIR /workspace
@@ -30,8 +31,12 @@ RUN mkdir -p /workspace/input
 RUN mkdir -p /workspace/output
 COPY gaussian_splatting /workspace/gaussian-splatting
 
+# Force Torch extension build to target the correct compute capability
+ENV CUDA_HOME="/usr/local/cuda"
+ENV TORCH_CUDA_ARCH_LIST="8.6"
+
 # Install your local submodules
-RUN pip install --no-cache-dir \
+RUN pip install \
       /workspace/gaussian-splatting/submodules/diff-gaussian-rasterization \
       /workspace/gaussian-splatting/submodules/simple-knn \
       /workspace/gaussian-splatting/submodules/fused-ssim

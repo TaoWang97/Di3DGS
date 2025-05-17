@@ -4,6 +4,7 @@
 set -e
 
 # Define image name and tag
+REPO="docker.io/patrickwang97"
 IMAGE_NAME="colmap"
 TAG="latest"
 
@@ -13,8 +14,11 @@ DOCKERFILE_PATH=$REPO_ROOT/docker/colmap/Dockerfile
 cd $REPO_ROOT
 
 # Build the Docker image
+echo "🔧 Building Docker image: $IMAGE_NAME:$TAG"
 docker build \
     -f "$DOCKERFILE_PATH" \
-    -t $IMAGE_NAME:$TAG "$REPO_ROOT"
+    -t "$REPO/$IMAGE_NAME:$TAG" "$REPO_ROOT"
 
 echo "✅ Docker image $IMAGE_NAME:$TAG built successfully"
+
+docker push "$REPO/$IMAGE_NAME:$TAG"

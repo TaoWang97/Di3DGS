@@ -4,7 +4,8 @@
 set -e
 
 # Define image name and tag
-IMAGE_NAME="di_3dgs"
+REPO="docker.io/patrickwang97"
+IMAGE_NAME="3dgs"
 TAG="latest"
 
 # Get the directory where the script is located
@@ -16,6 +17,9 @@ cd $REPO_ROOT
 echo "🔧 Building Docker image: $IMAGE_NAME:$TAG"
 docker build \
     -f "$DOCKERFILE_PATH" \
-    -t $IMAGE_NAME:$TAG "$REPO_ROOT"
+    -t "$REPO/$IMAGE_NAME:$TAG" "$REPO_ROOT"
 
-echo "✅ Docker image $IMAGE_NAME:$TAG built successfully"
+echo "✅ Built docker image $IMAGE_NAME:$TAG successfully"
+
+docker push "$REPO/$IMAGE_NAME:$TAG"
+echo "✅ Pushed docker image $IMAGE_NAME:$TAG successfully"
