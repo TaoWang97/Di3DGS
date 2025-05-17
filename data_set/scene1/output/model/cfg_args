@@ -1,0 +1,1 @@
+Namespace(sh_degree=3, source_path='/home/patrick-wang/Documents/personal/gaussian-splatting', model_path='data_set/scene1/output/model', images='data_set/scene1/images', depths='', resolution=1, white_background=False, train_test_exp=False, data_device='cuda', eval=True)
