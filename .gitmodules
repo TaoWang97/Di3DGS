@@ -1,9 +1,11 @@
 [submodule "colmap"]
 	path = colmap
 	url = git@github.com:TaoWang97/colmap.git
+	branch = main
 [submodule "gaussian_splatting"]
 	path = gaussian_splatting
 	url = git@github.com:TaoWang97/gaussian-splatting.git
+	branch = main
 [submodule "nuscenes_dataset"]
 	path = nuscenes_dataset
 	url = git@github.com:mrgares/vx51_nuscenes_dataset.git
