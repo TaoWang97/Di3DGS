@@ -42,4 +42,8 @@ WORKDIR /workspace
 RUN mkdir -p /workspace/input
 RUN mkdir -p /workspace/output
 
-ENTRYPOINT ["colmap", "automatic_reconstructor", "--image_path", "/workspace/input", "--workspace_path", "/workspace/output"]
+
+COPY ./execute_colmap_pipeline.sh /workspace/execute_colmap_pipeline.sh
+RUN chmod +x /workspace/execute_colmap_pipeline.sh
+
+ENTRYPOINT ["/workspace/execute_colmap_pipeline.sh"]

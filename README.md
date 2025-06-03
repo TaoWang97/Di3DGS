@@ -48,3 +48,4 @@ docker run --rm -it \
   -v /abs_path/to/output:/workspace/output \
   3dgs:latest
 ```
+docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/patrick-wang/Documents/personal/Di3DGS/data:/workspace/input -v /home/patrick-wang/Documents/personal/Di3DGS/data/3dgs_output:/workspace/output patrickwang97/3dgs:latest

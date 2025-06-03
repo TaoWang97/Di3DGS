@@ -1,7 +1,6 @@
 # Chnage those parameters based on your architecture/setup
 ARG UBUNTU_VERSION=22.04
 ARG NVIDIA_CUDA_VERSION=11.8.0
-ARG TORCH_CUDA_ARCH=8.6
 
 FROM nvidia/cuda:${NVIDIA_CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION}
 
@@ -11,7 +10,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       git wget build-essential ninja-build \
       libgl1-mesa-glx libglib2.0-0 \
       libglew-dev libfreeimage-dev \
-      imagemagick \
+      imagemagick libassimp-dev \
+      libboost-all-dev libgtk-3-dev \
+      libopencv-dev libglfw3-dev \
+      libavdevice-dev libavcodec-dev \
+      libeigen3-dev libxxf86vm-dev \
+      libembree-dev cmake\
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip to the exact version you want  
@@ -36,9 +40,13 @@ RUN mkdir -p /workspace/input
 RUN mkdir -p /workspace/output
 COPY gaussian_splatting /workspace/gaussian-splatting
 
+RUN cd /workspace/gaussian-splatting/SIBR_viewers && \
+    cmake -B build . -DCMAKE_BUILD_TYPE=Release -G Ninja && \
+    cmake --build build -j24 --target install
+
 # Force Torch extension build to target the correct compute capability
 ENV CUDA_HOME="/usr/local/cuda"
-ENV TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH}"
+ENV TORCH_CUDA_ARCH_LIST=8.6
 
 # Install your local submodules
 RUN pip install \
@@ -46,4 +54,8 @@ RUN pip install \
       /workspace/gaussian-splatting/submodules/simple-knn \
       /workspace/gaussian-splatting/submodules/fused-ssim
 
-CMD ["bash"]
+
+COPY execute_3dgs_pipeline.sh /workspace/execute_3dgs_pipeline.sh
+RUN chmod +x /workspace/execute_3dgs_pipeline.sh
+      
+ENTRYPOINT ["/workspace/execute_3dgs_pipeline.sh"]

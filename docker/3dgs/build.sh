@@ -10,16 +10,25 @@ TAG="latest"
 
 # Get the directory where the script is located
 REPO_ROOT=$(git rev-parse --show-toplevel)
-DOCKERFILE_PATH=$REPO_ROOT/docker/3dgs/Dockerfile
+WORKSPACE_DIR=$REPO_ROOT/docker/3dgs
 cd $REPO_ROOT
+
+# Copy gaussian_splatting into the build context
+rm -rf "$WORKSPACE_DIR/gaussian_splatting"
+cp -r "$REPO_ROOT/gaussian_splatting" "$WORKSPACE_DIR/gaussian_splatting"
+echo "Copied gaussian_splatting into $WORKSPACE_DIR"
 
 # Build the Docker image
 echo "🔧 Building Docker image: $IMAGE_NAME:$TAG"
 docker build \
-    -f "$DOCKERFILE_PATH" \
-    -t "$REPO/$IMAGE_NAME:$TAG" "$REPO_ROOT"
+    -f "$WORKSPACE_DIR/Dockerfile" \
+    -t "$REPO/$IMAGE_NAME:$TAG" "$WORKSPACE_DIR"
 
 echo "✅ Built docker image $IMAGE_NAME:$TAG successfully"
 
-docker push "$REPO/$IMAGE_NAME:$TAG"
+# docker push "$REPO/$IMAGE_NAME:$TAG"
 echo "✅ Pushed docker image $IMAGE_NAME:$TAG successfully"
+
+# Remove the copied gaussian_splatting to clean up
+rm -rf "$WORKSPACE_DIR/gaussian_splatting"
+echo "Removed copied gaussian_splatting from $WORKSPACE_DIR"
