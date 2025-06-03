@@ -9,6 +9,8 @@
 [submodule "nuscenes_dataset"]
 	path = nuscenes_dataset
 	url = git@github.com:mrgares/vx51_nuscenes_dataset.git
+	branch = main
 [submodule "driving_forward"]
 	path = driving_forward
 	url = git@github.com:mrgares/DrivingForward.git
+	branch = main
