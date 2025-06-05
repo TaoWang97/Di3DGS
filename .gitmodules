@@ -13,4 +13,6 @@
 [submodule "driving_forward"]
 	path = driving_forward
 	url = git@github.com:mrgares/DrivingForward.git
-	branch = main
+[submodule "refinement_diffusion_model"]
+	path = refinement_diffusion_model
+	url = git@github.com:mrgares/GS-Diffusion.git
