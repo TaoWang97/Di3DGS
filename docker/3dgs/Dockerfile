@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       libopencv-dev libglfw3-dev \
       libavdevice-dev libavcodec-dev \
       libeigen3-dev libxxf86vm-dev \
-      libembree-dev cmake\
+      libembree-dev cmake ffmpeg\
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip to the exact version you want  

@@ -9,7 +9,7 @@ If you haven't used --recursive, then run:
 git submodule update --init --recursive
 ```
 ## Hardware Requirement
-The default CUDA version is 11.8
+The default CUDA version is 11.8, GPU memory is 24 GB. \
 However, you can build your docker images simply by replacing parameters in the Dockerfile based on your hardware.
 ```bash
 ARG NVIDIA_CUDA_VERSION=11.8.0
@@ -17,6 +17,8 @@ ARG TORCH_CUDA_ARCH=8.6
 ARG CUDA_ARCHITECTURES=86
 ```
 
+## Run The Entire Pipeline
+./scripts/run_pipeline.sh <ABS_IMAGE_FOLDER_NAME> <ABS_WORKSPACE_DIR>
 
 ## COLMAP
 Pull the repo from a docker registry:
@@ -26,29 +28,27 @@ docker pull docker.io/patrickwang97/colmap
 
 Command to run colmap:
 ```bash
-docker run --rm -it \
-  --gpus all \
-  -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
+docker run --rm --gpus all \
   -v /abs_path/to/image_folder:/workspace/input \
-  -v /abs_path/to/output:/workspace/output \
-  colmap:latest
+  -v /abs_path/to/workspace_folder:/workspace/output \
+  patrickwang97/colmap:latest
 ```
 
-## 3DGS
+## Di3DGS
 Pull the repo from a docker registry:
 ```bash
-docker pull docker.io/patrickwang97/3dgs
+docker pull docker.io/patrickwang97/di3dgs
 ```
 Command to run colmap:
 ```bash
 docker run --rm -it \
   --gpus all \
-  -v /abs_path/to/image_folder:/workspace/input \
-  -v /abs_path/to/output:/workspace/output \
-  3dgs:latest
+  -v /abs_path/to/workspace_folder:/workspace/input \
+  -v /abs_path/to/workspace_folder:/workspace/output \
+  di3dgs:latest
 ```
-docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/patrick-wang/Documents/personal/Di3DGS/data:/workspace/input -v /home/patrick-wang/Documents/personal/Di3DGS/data/3dgs_output:/workspace/output patrickwang97/3dgs:latest
 
 
-python3 train.py -s /workspace/input/undistorted_colmap --model_path /workspace/output/gaussian_splatting --use_difix --eval
+<video controls width="640" src="https://github.com/TaoWang97/Di3DGS/blob/master/videos/front.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>

@@ -5,7 +5,7 @@ set -e
 
 # Define image name and tag
 REPO="docker.io/patrickwang97"
-IMAGE_NAME="3dgs"
+IMAGE_NAME="di3dgs"
 TAG="latest"
 
 # Get the directory where the script is located

@@ -1,9 +1,14 @@
 #!/bin/bash
 set -e
 
-# Input directory of images
-input_dir="/home/patrick-wang/Documents/personal/Di3DGS/data_set/scene1/big"
-workspace_dir="/home/patrick-wang/Documents/personal/Di3DGS/test/workspace"
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 <input_dir> <workspace_dir>"
+  exit 1
+fi
+
+# folder that stores all the images
+input_dir="$1"
+workspace_dir="$2"
 
 echo -e "\e[1;34m========================================\e[0m"
 echo -e "\e[1;32m    🚀 Running the COLMAP Pipeline 🚀    \e[0m"
@@ -21,4 +26,4 @@ echo -e "\e[1;34m========================================\e[0m"
 docker run --rm --gpus all \
   -v $workspace_dir:/workspace/input \
   -v $workspace_dir:/workspace/output \
-  patrickwang97/3dgs:latest
+  patrickwang97/di3dgs:latest
