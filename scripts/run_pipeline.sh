@@ -2,7 +2,7 @@
 set -e
 
 # Input directory of images
-input_dir="/home/patrick-wang/Documents/personal/Di3DGS/test/input"
+input_dir="/home/patrick-wang/Documents/personal/Di3DGS/data_set/scene1/big"
 workspace_dir="/home/patrick-wang/Documents/personal/Di3DGS/test/workspace"
 
 echo -e "\e[1;34m========================================\e[0m"

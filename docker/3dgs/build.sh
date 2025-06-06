@@ -16,6 +16,7 @@ cd $REPO_ROOT
 # Copy gaussian_splatting into the build context
 rm -rf "$WORKSPACE_DIR/gaussian_splatting"
 cp -r "$REPO_ROOT/gaussian_splatting" "$WORKSPACE_DIR/gaussian_splatting"
+# cp -r $REPO_ROOT/diffusion/models--runwayml--stable-diffusion-v1-5 $WORKSPACE_DIR/models--runwayml--stable-diffusion-v1-5
 echo "Copied gaussian_splatting into $WORKSPACE_DIR"
 
 # Build the Docker image
@@ -26,9 +27,10 @@ docker build \
 
 echo "✅ Built docker image $IMAGE_NAME:$TAG successfully"
 
-# docker push "$REPO/$IMAGE_NAME:$TAG"
+docker push "$REPO/$IMAGE_NAME:$TAG"
 echo "✅ Pushed docker image $IMAGE_NAME:$TAG successfully"
 
 # Remove the copied gaussian_splatting to clean up
 rm -rf "$WORKSPACE_DIR/gaussian_splatting"
-echo "Removed copied gaussian_splatting from $WORKSPACE_DIR"
+# rm -rf $WORKSPACE_DIR/models--runwayml--stable-diffusion-v1-5
+echo "Finish cleaning up $WORKSPACE_DIR"

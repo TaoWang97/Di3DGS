@@ -49,3 +49,6 @@ docker run --rm -it \
   3dgs:latest
 ```
 docker run --rm -it --gpus all -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/patrick-wang/Documents/personal/Di3DGS/data:/workspace/input -v /home/patrick-wang/Documents/personal/Di3DGS/data/3dgs_output:/workspace/output patrickwang97/3dgs:latest
+
+
+python3 train.py -s /workspace/input/undistorted_colmap --model_path /workspace/output/gaussian_splatting --use_difix --eval

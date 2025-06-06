@@ -34,11 +34,20 @@ RUN pip install --no-cache-dir \
       torchaudio \
       --index-url https://download.pytorch.org/whl/cu118
 
+RUN pip install --no-cache-dir \
+      transformers \
+      scipy \
+      ftfy \
+      accelerate \
+      "ipywidgets>=7,<8" \
+      "git+https://github.com/huggingface/diffusers.git"
+
 # Workspace & your code
 WORKDIR /workspace
 RUN mkdir -p /workspace/input
 RUN mkdir -p /workspace/output
 COPY gaussian_splatting /workspace/gaussian-splatting
+# COPY models--runwayml--stable-diffusion-v1-5 /workspace/models--runwayml--stable-diffusion-v1-5
 
 RUN cd /workspace/gaussian-splatting/SIBR_viewers && \
     cmake -B build . -DCMAKE_BUILD_TYPE=Release -G Ninja && \
