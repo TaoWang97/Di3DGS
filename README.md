@@ -76,6 +76,10 @@ This script will run both the COLMAP SfM steps and our Di3DGS reconstruction in 
   - 3DGS and Di3DGS model checkpoints and rendered frames  
   - Final fly-through videos for each camera
 
+### Dataset Example
+- **Scene 1 (Big)**  
+  Download from: [Scene 1 (Big) dataset on GitHub](https://github.com/TaoWang97/Di3DGS/tree/master/data_set/scene1/big)
+
 ## COLMAP
 Pull the repo from a docker registry:
 ```bash
