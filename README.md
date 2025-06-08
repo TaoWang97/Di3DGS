@@ -1,4 +1,11 @@
 # Di3DGS
+
+Diffusion-Guided Gaussian Splatting (Di3DGS) is a hybrid 3D reconstruction model that combines Gaussian splatting with a diffusion-based refinement step. It generates visually consistent 3D scenes from sparse camera inputs, supporting downstream tasks like object tracking, planning, and occlusion reasoning in autonomous driving scenarios.
+
+![Di3DGS Demo](assets/demo.gif)
+
+## Setup
+
 Clone the repo:
 ```bash
 git clone --recursive git@github.com:TaoWang97/Di3DGS.git
